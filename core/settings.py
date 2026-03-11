@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-1qrt!j)kc=bitenp+_$^f-fv_^^i*5vs6b@^1)ea-f5)qclfr4"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -132,11 +132,11 @@ SITE_NAME = "Auth System"
 
 LOGOUT_REDIRECT_URL = 'login'
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'live.smtp.mailtrap.io'
 EMAIL_HOST_USER = 'api'
-EMAIL_HOST_PASSWORD = 'a10a0eca085c6ed94aa1379887ab0de0'
+
 EMAIL_PORT = '587'
 
 LOGIN_URL = 'login'
