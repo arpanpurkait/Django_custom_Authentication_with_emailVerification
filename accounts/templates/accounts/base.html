@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>{% block title %}My Auth App{% endblock %}</title>
+    <style>
+    /* Rail gadi ka engine (animation) */
+    @keyframes marquee {
+        0% { transform: translateX(100%); }   /* Screen ke bahar right se shuru */
+        100% { transform: translateX(-100%); } /* Screen ke bahar left mein khatam */
+    }
+
+    .animate-marquee {
+        display: inline-block;
+        animation: marquee 6s linear infinite; /* 6s matlab speed, kam karoge toh fast chalegi */
+    }
+
+    /* Mouse upar laye toh train ruk jaye */
+    .animate-marquee:hover {
+        animation-play-state: paused;
+        cursor: pointer;
+    }
+</style>
+</head>
+
+<body class="flex flex-col min-h-screen bg-gray-100">
+
+    <nav class="bg-gray-800 text-white p-4">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto">
+
+            <a href="{% url 'home' %}" class="flex items-center space-x-3">
+                <span class="self-center text-2xl font-semibold whitespace-nowrap">Auth System</span>
+            </a>
+
+            <button data-collapse-toggle="navbar-default" type="button"
+                class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-400 rounded-lg md:hidden hover:bg-gray-700"
+                aria-controls="navbar-default" aria-expanded="false">
+                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 17 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M1 1h15M1 7h15M1 13h15" />
+                </svg>
+            </button>
+
+            <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+                <ul
+                    class="font-medium flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-8 mt-4 md:mt-0">
+                    <li>
+                        <a href="{% url 'home' %}" class="block py-2 hover:text-blue-400">Home</a>
+                    </li>
+
+                    {% if user.is_authenticated %}
+                    <li>
+                        <a href="{% url 'customer_dashboard' %}" class="block py-2 hover:text-blue-400">Customer
+                            Dashboard</a>
+                    </li>
+                    <li>
+                        <form method="POST" action="{% url 'logout' %}" class="inline">
+                            {% csrf_token %}
+                            <button type="submit"
+                                class="px-4 py-2 text-sm text-white bg-rose-700 rounded-lg hover:bg-rose-900 transition-colors">
+                                Logout
+                            </button>
+                        </form>
+                    </li>
+                    <li class="text-gray-300 pr-4 border-r border-gray-600 hidden md:block overflow-hidden">
+                        <div class="flex items-center space-x-1">
+                            <span>{{ user }}</span>
+                        </div>
+                    </li>
+                    {% else %}
+                    <li>
+                        <a href="{% url 'login' %}" class="block py-2 px-3 hover:text-blue-400">Login</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'register' %}" class="block py-2 px-3 hover:text-blue-400">Register</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="flex-grow container mx-auto p-4">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="bg-gray-800 text-white text-center p-4 mt-auto">
+        <p>&copy; 2024 Auth System. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+</body>
+
+</html>

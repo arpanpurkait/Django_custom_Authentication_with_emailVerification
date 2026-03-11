@@ -1,0 +1,8 @@
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('dashboard/', views.seller_dashboard, name='seller_dashboard'),
+    path('password_change/', views.password_change, name='password_change'),
+
+]

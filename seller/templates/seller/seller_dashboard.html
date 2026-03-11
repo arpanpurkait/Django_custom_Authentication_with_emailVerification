@@ -1,0 +1,9 @@
+{% extends 'accounts/base.html' %}
+{% block title %}Customer Dashboard{% endblock title %}
+{% block content %}
+<h1 class="test-center mt-6 font-bold">Customer Dashboard</h1>
+<p class="text-center mt-4">Welcome to your dashboard! Here you can manage your account, view your orders, and update your profile information.</p>
+<div class="flex justify-center mt-6">
+    <a href="{% url 'password_change' %}" class="bg-rose-400 p-4 m-6">Change Password</a>
+</div>
+{% endblock content %}
